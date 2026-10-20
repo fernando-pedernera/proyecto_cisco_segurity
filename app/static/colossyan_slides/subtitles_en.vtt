@@ -1,0 +1,57 @@
+WEBVTT
+
+00:00:00.000 --> 00:00:06.200
+It's nine a.m. A developer pastes two hundred lines of proprietary code
+into a public AI assistant to fix a bug.
+
+00:00:06.200 --> 00:00:11.500
+No bad intent. But that code just left your organization.
+
+00:00:11.500 --> 00:00:17.500
+This is Shadow AI: employees using GenAI apps that IT never approved.
+And traditional controls fall short.
+
+00:00:17.500 --> 00:00:23.000
+Blocking the category pushes users to personal devices.
+Pattern-only DLP misses context.
+
+00:00:23.000 --> 00:00:28.000
+And without decryption, you can't even see the prompt.
+
+00:00:28.000 --> 00:00:34.500
+Cisco Secure Access turns GenAI governance into five steps:
+discover, decrypt, classify, enforce, and refine.
+
+00:00:34.500 --> 00:00:40.500
+First, discover. AI Access shows which GenAI apps are in use
+across your organization, and how risky they are.
+
+00:00:40.500 --> 00:00:44.500
+You can't govern what you can't see.
+
+00:00:44.500 --> 00:00:50.500
+Second, decrypt. Prompt inspection requires HTTPS inspection
+on the matching access policy.
+
+00:00:50.500 --> 00:00:55.500
+Skip this step, and every prompt is just encrypted traffic.
+It's a common misconfiguration.
+
+00:00:55.500 --> 00:01:01.500
+Next, classify and enforce. In your DLP policy,
+add an AI Guardrails rule.
+
+00:01:01.500 --> 00:01:08.500
+It inspects prompts, responses, and file uploads for sensitive data
+and source code, then monitors or blocks the interaction.
+
+00:01:08.500 --> 00:01:16.500
+Finally, refine. Start in Monitor mode. Baseline real usage,
+tune out false positives, then move to Block.
+
+00:01:16.500 --> 00:01:21.500
+Shadow AI is a data-exposure problem.
+The answer isn't to block AI. It's to govern it.
+
+00:01:21.500 --> 00:01:25.500
+Now, let's put that into practice.

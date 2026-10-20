@@ -1,0 +1,70 @@
+1
+00:00:00,000 --> 00:00:06,200
+Son las 9:00 a.m. Un desarrollador pega 200 líneas de código propietario
+en un asistente de IA público para corregir un error.
+
+2
+00:00:06,200 --> 00:00:11,500
+Sin mala intención. Pero ese código acaba de salir de tu organización.
+
+3
+00:00:11,500 --> 00:00:17,500
+Esto es Shadow AI: empleados usando aplicaciones GenAI no aprobadas por TI.
+Y los controles tradicionales se quedan cortos.
+
+4
+00:00:17,500 --> 00:00:23,000
+Bloquear la categoría empuja a los usuarios a dispositivos personales.
+El DLP basado solo en patrones pierde el contexto.
+
+5
+00:00:23,000 --> 00:00:28,000
+Y sin descifrado TLS, ni siquiera puedes ver el prompt.
+
+6
+00:00:28,000 --> 00:00:34,500
+Cisco Secure Access convierte la gobernanza de GenAI en cinco pasos:
+descubrir, descifrar, clasificar, controlar y refinar.
+
+7
+00:00:34,500 --> 00:00:40,500
+Primero, descubrir. AI Access muestra qué aplicaciones GenAI se usan
+en tu organización y qué nivel de riesgo tienen.
+
+8
+00:00:40,500 --> 00:00:44,500
+No puedes gobernar lo que no puedes ver.
+
+9
+00:00:44,500 --> 00:00:50,500
+Segundo, descifrar. La inspección de prompts requiere habilitar
+HTTPS Inspection en la política de acceso correspondiente.
+
+10
+00:00:50,500 --> 00:00:55,500
+Si omites este paso, cada prompt es solo tráfico cifrado.
+Es un error de configuración muy común.
+
+11
+00:00:55,500 --> 00:01:01,500
+Luego, clasificar y controlar. En tu política DLP,
+agrega una regla de AI Guardrails.
+
+12
+00:01:01,500 --> 00:01:08,500
+Inspecciona prompts, respuestas y archivos subidos buscando datos sensibles
+y código fuente, y luego monitorea o bloquea la interacción.
+
+13
+00:01:08,500 --> 00:01:16,500
+Finalmente, refinar. Comienza en modo Monitor. Mide el uso real,
+ajusta falsos positivos y luego pasa a Block.
+
+14
+00:01:16,500 --> 00:01:21,500
+El Shadow AI es un problema de exposición de datos.
+La respuesta no es bloquear la IA, sino gobernarla.
+
+15
+00:01:21,500 --> 00:01:25,500
+Ahora, pongámoslo en práctica.

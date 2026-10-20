@@ -1,0 +1,32 @@
+{
+  "status": "completed",
+  "last_run": "2026-10-15 21:16:40",
+  "active_agent": null,
+  "logs": [
+    "[2026-10-15 21:16:40] LIVE EXECUTION ON AZURE (gpt-5-mini) [GUARDADO EN DISCO]",
+    "[FUENTE] Documentación técnica cargada: 'cisco_secure_access_source.md' (3142 caracteres).",
+    "[Agente 1: Extractor Técnico] Extrayendo Matriz de Verdad Técnica (Ground Truth) desde la fuente...",
+    "[Agente 1 Completado] Matriz extraída con éxito (912 tokens entrada / 1120 salida).",
+    "[Agente 2: Diseñador Instruccional] Construyendo objetivos de Bloom y escenario práctico...",
+    "[Agente 2 Completado] Diseño instruccional listo (495 tokens entrada / 1084 salida).",
+    "[Agente 3: Guionista Colossyan] Redactando guion de video a 2 columnas con marcadores de voz...",
+    "[Agente 3 Completado] Guion de video sintetizado (842 tokens entrada / 2310 salida).",
+    "[Agente 4: Auditor QA] Auditando el guion contra la documentación técnica original...",
+    "[Agente 4 Completado] Auditoría QA finalizada (1630 tokens entrada / 1618 salida).",
+    "[PIPELINE COMPLETADO] Tokens totales: 10011 (3879 in / 6132 out) | Costo real: $0.01688 USD"
+  ],
+  "live_outputs": {
+    "source_name": "cisco_secure_access_source.md",
+    "agent_1_ground_truth": "- Componentes Arquitectónicos Clave:\n  - Cisco Secure Access (SSE convergente: SWG, CASB, ZTNA, DLP).\n  - AI Access (descubrimiento y perfilado de riesgo de aplicaciones GenAI).\n  - Data Loss Prevention (DLP) con reglas AI Guardrails.\n  - Portal/objeto de política: Access Policy (reglas donde se aplica HTTPS Inspection y DLP).\n\n- Prerrequisitos Técnicos Obligatorios:\n  - HTTPS Inspection (descifrado TLS) DEBE estar habilitado en la regla de la Access Policy correspondiente para que DLP/AI Guardrails inspeccione prompts, respuestas y cargas de archivos.\n\n- Errores Comunes de Configuración (Misconfigurations):\n  - Activar regla AI Guardrails sin habilitar HTTPS Inspection → motor DLP ve solo encabezado TLS y tendrá 0 hits.\n  - Bloquear por URL/categoría en la Access Policy antes del motor DLP → sesión cortada y no hay inspección de prompts.\n\n- Estrategia Recomendada de Despliegue:\n  - 5 pasos: Discover, Decrypt, Classify, Enforce, Refine.\n  - No bloquear masivamente; iniciar AI Guardrails en modo Monitor 1–2 semanas, ajustar falsos positivos y luego pasar a Block según confianza.",
+    "agent_2_instructional_brief": "# Resumen de Diseño de Microaprendizaje\n\n## Objetivos de Aprendizaje\n- OA1 (Analizar): Analizar la cadena de inspección de Cisco Secure Access (AI Access, DLP, Access Policy) para identificar por qué un motor DLP no reporta hits.\n- OA2 (Aplicar): Aplicar la regla obligatoria de HTTPS Inspection en la Access Policy y seguir la secuencia Discover → Decrypt → Classify → Enforce → Refine para habilitar AI Guardrails.\n- OA3 (Evaluar): Evaluar riesgos de misconfiguración (activar AI Guardrails sin decrypt o bloquear por URL antes de DLP) y decidir transición de Monitor a Block tras 1–2 semanas de ajuste de falsos positivos.\n\n## Escenario empresarial\nUn equipo de seguridad de una empresa implementa AI Guardrails sobre Cisco Secure Access para proteger prompts/respuestas y cargas de archivos de GenAI. Tras desplegar las reglas, observan 0 hits. Deben diagnosticar si HTTPS Inspection está habilitado en la Access Policy y comprobar que no exista una regla que bloquee por URL/categoría antes del motor DLP; luego ejecutar la estrategia de despliegue (Discover, Decrypt, Classify, Enforce, Refine) iniciando en Monitor 1–2 semanas antes de bloquear.",
+    "agent_3_video_script": "| Escena y Visuales | Locución / Narración |\n|---|---|\n| Escena 1 — Dashboard: captura de pantalla con **0 hits** en DLP, íconos de **AI Access**, DLP y Access Policy conectados | Equipo: desplegaron AI Guardrails sobre Cisco Secure Access y ven **0 hits** en DLP. [pausa] Analicen la cadena: **AI Access**, **DLP**, **Access Policy**. El DLP debe inspeccionar prompts, respuestas y cargas de archivos. |\n| Escena 2 — Vista de Access Policy: regla seleccionada, toggle de **HTTPS Inspection** | Paso crítico: la regla de la **Access Policy** **DEBE** tener **HTTPS Inspection** habilitado en la regla correspondiente. [pausa] Si no, el DLP solo ve el encabezado TLS y no genera hits. |\n| Escena 3 — Lista de reglas ordenadas: regla de bloqueo por URL antes del DLP marcada en rojo | Verifiquen el orden de reglas: bloquear por **URL/categoría** antes del DLP corta la sesión y evita inspección de prompts; revisen logs y reglas previas. [pausa] Esa es una misconfiguración común. |\n| Escena 4 — Diagrama de flujo 5 pasos: Discover → Decrypt → Classify → Enforce → Refine; timeline Monitor 1–2 semanas | Impleméntenlo con estos pasos: **Discover → Decrypt → Classify → Enforce → Refine**. [pausa] Inicien en **Monitor** 1–2 semanas, ajusten falsos positivos usando telemetría y luego pasen a **Block**. |",
+    "agent_4_qa_report": "# Informe QA — Guion vs Documentación Fuente\n\n## 1. Tabla de Verificación de Hechos\n| Afirmación en el Guion | Estado | Referencia en Fuente |\n|---|---:|---|\n| Escena 1: despliegue AI Guardrails y **0 hits** en DLP | SOPORTADO | Sección 3: \"La regla DLP tendrá **cero coincidencias (0 hits)**...\" |\n| DLP debe inspeccionar prompts, respuestas y cargas de archivos | SOPORTADO | Sección 4: \"Inspecciona en tiempo real prompts..., respuestas... y cargas de archivos\" |\n| La Access Policy **DEBE** tener HTTPS Inspection habilitado | SOPORTADO | Sección 3: \"la inspección HTTPS (descifrado TLS) DEBE estar habilitada...\" |\n| Bloquear por URL/categoría antes del DLP corta la sesión y evita inspección | SOPORTADO | Sección 3: \"si la Política de Acceso bloquea... antes de llegar al motor DLP, el tráfico se corta...\" |\n| Rollout: Discover → Decrypt → Classify → Enforce → Refine; iniciar Monitor 1–2 semanas → Block | SOPORTADO | Sección 5: estrategia recomendada y pasos descritos textualmente |\n\n## 2. Auditoría de Tono y Ritmo\nTono correcto de ingeniero: directo, técnico y sin hipérbole comercial. Ritmo adecuado (pausas indicadas). Sugerencia: evitar mayúsculas enfatizadas (\"DEBE\") en la locución para mantener neutralidad técnica.\n\n## 3. Veredicto Final\nAPROBADO (PASS)",
+    "usage": {
+      "input_tokens": 3879,
+      "output_tokens": 6132,
+      "total_tokens": 10011,
+      "estimated_cost_usd": 0.01688
+    }
+  },
+  "deliverables_ready": true
+}

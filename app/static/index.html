@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cisco Security AI Enablement Suite | Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-badge">CISCO AI</div>
+                <div class="logo-text">
+                    <h2>Enablement Suite</h2>
+                    <span class="role-tag">Sr. AI Content Developer</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" data-tab="overview">
+                    <span class="icon">📊</span> Visión General & Fuente
+                </button>
+                <button class="nav-item" data-tab="pipeline">
+                    <span class="icon">⚡</span> Salidas en Vivo (gpt-5-mini)
+                </button>
+                <button class="nav-item" data-tab="script">
+                    <span class="icon">🎬</span> Guion Colossyan (M2)
+                </button>
+                <button class="nav-item" data-tab="simulator">
+                    <span class="icon">🎯</span> Simulador por Escenarios (M3)
+                </button>
+                <button class="nav-item" data-tab="architecture">
+                    <span class="icon">🏛️</span> Arquitectura de Red (M1/M4)
+                </button>
+            </nav>
+
+            <div class="author-card">
+                <div class="avatar-ring">FP</div>
+                <div class="author-info">
+                    <strong>Fernando Pedernera</strong>
+                    <span>AI Engineer & Data Scientist</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Bar -->
+            <header class="top-header">
+                <div class="header-title">
+                    <h1 id="page-title">Panel de Control: Cisco Security AI Content Suite</h1>
+                    <p class="subtitle">Conectado en vivo a tu despliegue Azure AI Foundry (<strong>gpt-5-mini</strong>)</p>
+                </div>
+                <div class="header-actions">
+                    <span class="badge status-live" id="system-status">● Azure gpt-5-mini Listo</span>
+                    <button class="btn btn-primary" id="btn-run-pipeline">
+                        <span class="btn-icon">▶</span> Ejecutar Agentes en Vivo (Azure)
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dynamic Tab Content -->
+            <div class="content-scroll">
+                <!-- TAB 1: OVERVIEW & SOURCE INPUT -->
+                <section class="tab-pane active" id="tab-overview">
+                    <div class="metrics-grid">
+                        <div class="glass-card metric-card">
+                            <span class="metric-label">Fuente del Agente 1</span>
+                            <h3 class="metric-value" id="metric-source-name">cisco_secure_access_source.md</h3>
+                            <p class="metric-sub">Carpeta local: <code>source_docs/</code> (editable abajo)</p>
+                        </div>
+                        <div class="glass-card metric-card">
+                            <span class="metric-label">Motor LLM Activo</span>
+                            <h3 class="metric-value">Azure gpt-5-mini</h3>
+                            <p class="metric-sub">4 Agentes encadenados en tiempo real</p>
+                        </div>
+                        <div class="glass-card metric-card">
+                            <span class="metric-label">Tokens & Costo Real</span>
+                            <h3 class="metric-value" id="metric-tokens">Listo para correr</h3>
+                            <p class="metric-sub" id="metric-cost">Costo estimado: ~$0.008 USD / corrida</p>
+                        </div>
+                        <div class="glass-card metric-card">
+                            <span class="metric-label">QA y Control de Calidad</span>
+                            <h3 class="metric-value" id="metric-qa">100% Verificado</h3>
+                            <p class="metric-sub">Auditoría automática contra tu documento fuente</p>
+                        </div>
+                    </div>
+
+                    <div class="split-view">
+                        <!-- Left: Source Document Input for Agent 1 -->
+                        <div class="glass-card">
+                            <div class="flex-between mb-2">
+                                <h3>1. Documentación Fuente (Entrada del Agente 1)</h3>
+                                <select id="source-doc-selector" class="doc-select">
+                                    <option value="cisco_secure_access_source.md">📄 Cisco Secure Access (SSE & AI Guardrails)</option>
+                                    <option value="cisco_sdwan_sase_source.md">📄 Cisco Catalyst SD-WAN & SASE Tunnels</option>
+                                    <option value="custom">✏️ Pegar mi propia documentación técnica...</option>
+                                </select>
+                            </div>
+                            <p class="card-desc">Esta es la documentación técnica en bruto que lee el <strong>Agente 1 (Extractor)</strong>. Puedes elegir una plantilla de <code>source_docs/</code> o editar/pegar cualquier texto técnico de Cisco:</p>
+                            <textarea id="source-doc-textarea" class="source-textarea" rows="13" placeholder="Pega aquí la documentación técnica de Cisco..."></textarea>
+                            <div style="margin-top:0.75rem; display:flex; align-items:center; gap:0.5rem; font-size:0.82rem; color:var(--text-secondary);">
+                                <input type="checkbox" id="chk-force-live" style="cursor:pointer; accent-color:var(--cisco-cyan);">
+                                <label for="chk-force-live" style="cursor:pointer;">⚡ <strong>Forzar llamada en vivo a Azure API</strong> (si está desmarcado, usa el caché en disco a <strong>$0.00 USD</strong> si el documento ya fue procesado; modo ahorrador <code>reasoning=low</code> activo)</label>
+                            </div>
+                        </div>
+
+                        <!-- Right: Live Pipeline Console -->
+                        <div class="glass-card">
+                            <h3>2. Consola de Ejecución en Vivo (Azure AI Foundry)</h3>
+                            <p class="card-desc">Presiona <strong>"Ejecutar Agentes en Vivo"</strong> arriba a la derecha para que <code>gpt-5-mini</code> procese el documento de la izquierda por los 4 agentes (~15-25 seg):</p>
+                            <div class="console-box" id="pipeline-logs">
+                                <div class="log-line info">[INIT] Conectado a Azure AI Foundry (gpt-5-mini).</div>
+                                <div class="log-line success">[SOURCE] Documento cargado desde carpeta 'source_docs/cisco_secure_access_source.md'.</div>
+                                <div class="log-line highlight">[INFO] Puedes editar el texto a la izquierda o cambiar de documento y pulsar 'Ejecutar Agentes en Vivo'.</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 2: LIVE AGENT OUTPUTS -->
+                <section class="tab-pane" id="tab-pipeline">
+                    <div class="glass-card mb-4">
+                        <h2>Salidas Generadas en Vivo por los 4 Agentes (Azure gpt-5-mini)</h2>
+                        <p class="card-desc">Aquí aparecen en tiempo real los resultados que produce cada agente de tu modelo en Azure a partir del documento fuente cargado:</p>
+                    </div>
+
+                    <div class="agent-grid">
+                        <div class="glass-card agent-card">
+                            <div class="agent-header">
+                                <span class="agent-badge">Agente 1: Extractor Técnico</span>
+                                <span class="temp-badge">Ground Truth Matrix</span>
+                            </div>
+                            <h3>Matriz de Verdad Técnica Extraída</h3>
+                            <pre class="prompt-snippet live-output-box" id="live-out-agent1">Ejecuta el pipeline con el botón superior para ver la extracción en vivo de gpt-5-mini...</pre>
+                        </div>
+
+                        <div class="glass-card agent-card">
+                            <div class="agent-header">
+                                <span class="agent-badge">Agente 2: Diseñador Instruccional</span>
+                                <span class="temp-badge">Bloom's Taxonomy</span>
+                            </div>
+                            <h3>Objetivos Pedagógicos y Escenario</h3>
+                            <pre class="prompt-snippet live-output-box" id="live-out-agent2">Ejecuta el pipeline para ver el diseño instruccional generado en vivo...</pre>
+                        </div>
+
+                        <div class="glass-card agent-card">
+                            <div class="agent-header">
+                                <span class="agent-badge">Agente 3: Guionista Colossyan</span>
+                                <span class="temp-badge">2-Column Script</span>
+                            </div>
+                            <h3>Guion Técnico Sintetizado en Vivo</h3>
+                            <pre class="prompt-snippet live-output-box" id="live-out-agent3">Ejecuta el pipeline para ver el guion a 2 columnas generado en vivo...</pre>
+                        </div>
+
+                        <div class="glass-card agent-card">
+                            <div class="agent-header">
+                                <span class="agent-badge">Agente 4: Auditor QA</span>
+                                <span class="temp-badge">Fact-Check vs. Fuente</span>
+                            </div>
+                            <h3>Reporte de Auditoría Anti-Alucinaciones</h3>
+                            <pre class="prompt-snippet live-output-box" id="live-out-agent4">Ejecuta el pipeline para ver el dictamen de QA contra el documento fuente...</pre>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 3: GUION COLOSSYAN CURADO (M2) -->
+                <section class="tab-pane" id="tab-script">
+                    <div class="glass-card mb-4 flex-between">
+                        <div>
+                            <h2>Kit de Producción para Colossyan Studio (Lienzos 1920x1080 + Guion)</h2>
+                            <p class="card-desc">Importa el PDF completo de 8 escenas directamente en Colossyan Creator (o descarga cada lienzo PNG individual) y pega la locución de cada escena:</p>
+                        </div>
+                        <div style="display:flex; gap:0.75rem; flex-wrap:wrap;">
+                            <a href="https://www.youtube.com/watch?v=p4PykHBDhSA" target="_blank" class="btn btn-primary" style="text-decoration:none; background:linear-gradient(135deg, #ef4444, #b91c1c);">▶️ Ver Video Final en YouTube</a>
+                            <a href="/colossyan_slides/cisco_colossyan_8_scenes_deck.pdf" download="cisco_colossyan_8_scenes_deck.pdf" class="btn btn-primary" style="text-decoration:none;">📥 Descargar PDF (8 Escenas) para Colossyan</a>
+                            <button class="btn btn-secondary" id="btn-copy-script">📋 Copiar Todo el Guion</button>
+                        </div>
+                    </div>
+
+                    <!-- REPRODUCTOR LOCAL BILINGÜE CON SUBTÍTULOS (ES / EN) ANTES DE SUBIR A YOUTUBE -->
+                    <div class="glass-card mb-4">
+                        <div class="flex-between mb-2" style="flex-wrap:wrap; gap:0.75rem;">
+                            <div>
+                                <h3>🎥 Previsualizador Local con Subtítulos Elegibles (Español / Inglés) + Archivos `.SRT` para YouTube</h3>
+                                <p class="card-desc" style="margin-bottom:0;">Cuando descargues el video <code>.mp4</code> de Colossyan (sin subtítulos quemados), cárgalo aquí para probar los subtítulos intercambiables antes de subirlo a YouTube:</p>
+                            </div>
+                            <div style="display:flex; gap:0.6rem; flex-wrap:wrap;">
+                                <a href="/colossyan_slides/subtitles_es.srt" download="subtitles_es.srt" class="btn btn-secondary" style="text-decoration:none;">📥 Descargar Subtítulos Español (.SRT)</a>
+                                <a href="/colossyan_slides/subtitles_en.srt" download="subtitles_en.srt" class="btn btn-secondary" style="text-decoration:none;">📥 Descargar Subtítulos Inglés (.SRT)</a>
+                            </div>
+                        </div>
+
+                        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-top:1rem; padding:0.85rem; background:rgba(0,0,0,0.35); border-radius:8px; border:1px solid var(--border-glass);">
+                            <div style="display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap;">
+                                <label for="local-video-input" class="btn btn-primary" style="cursor:pointer; margin:0;">
+                                    📂 Seleccionar mi archivo .MP4 de Colossyan
+                                </label>
+                                <input type="file" id="local-video-input" accept="video/mp4,video/webm,video/*" style="display:none;">
+                                <span id="loaded-video-name" style="font-size:0.85rem; color:var(--text-secondary);">Ningún archivo .MP4 seleccionado aún</span>
+                            </div>
+
+                            <div style="display:flex; align-items:center; gap:0.5rem;">
+                                <span style="font-size:0.8rem; color:var(--text-muted); margin-right:0.25rem;">Idioma de Subtítulos (CC):</span>
+                                <button type="button" class="btn btn-secondary" id="btn-sub-es" onclick="setSubtitleTrack('es')" style="border-color:var(--cisco-cyan); color:var(--cisco-cyan); padding:0.4rem 0.8rem;">🇪🇸 Español</button>
+                                <button type="button" class="btn btn-secondary" id="btn-sub-en" onclick="setSubtitleTrack('en')" style="padding:0.4rem 0.8rem;">🇺🇸 English</button>
+                                <button type="button" class="btn btn-secondary" id="btn-sub-off" onclick="setSubtitleTrack('off')" style="padding:0.4rem 0.8rem;">🚫 Desactivar</button>
+                            </div>
+                        </div>
+
+                        <div id="video-preview-wrapper" style="margin-top:1rem; display:none; text-align:center;">
+                            <video id="colossyan-preview-player" controls style="width:100%; max-width:960px; border-radius:12px; border:1px solid var(--cisco-cyan); background:#000;">
+                                <track id="track-es" label="Español" kind="subtitles" srclang="es" src="/colossyan_slides/subtitles_es.vtt" default>
+                                <track id="track-en" label="English" kind="subtitles" srclang="en" src="/colossyan_slides/subtitles_en.vtt">
+                            </video>
+                        </div>
+                    </div>
+
+                    <div class="script-table-container glass-card">
+                        <table class="script-table">
+                            <thead>
+                                <tr>
+                                    <th style="width: 42%;">Escena y Lienzo Visual Listo (1920x1080 — 16:9)</th>
+                                    <th style="width: 58%;">Locución del Avatar (Voiceover para Colossyan)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="script-body">
+                                <tr>
+                                    <td>
+                                        <strong>1 — Hook (0:00–0:14)</strong><br>
+                                        <span class="visual-tag">B-roll: Dev en laptop | "Data just left the building."</span>
+                                        <a href="/colossyan_slides/scene_01_hook.png" target="_blank"><img src="/colossyan_slides/scene_01_hook.png" alt="Scene 1 Canvas" class="img-preview mt-2"></a>
+                                        <div class="mt-2"><a href="/colossyan_slides/scene_01_hook.png" download="scene_01_hook.png" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.7rem; text-decoration:none;">⬇️ Descargar Lienzo PNG (Escena 1)</a></div>
+                                    </td>
+                                    <td>
+                                        <p>It's nine a.m. <em>[pause]</em> A developer pastes two hundred lines of proprietary code into a public AI assistant to fix a bug. <em>[pause]</em> No bad intent. <em>[beat]</em> But that code just <strong>left your organization</strong>.</p>
+                                        <button class="btn btn-secondary mt-2" style="font-size:0.75rem; padding:0.35rem 0.7rem;" onclick="copySceneText(this, `It's nine a.m. A developer pastes two hundred lines of proprietary code into a public AI assistant to fix a bug. No bad intent. But that code just left your organization.`)">📋 Copiar Locución Escena 1 (Limpia)</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>2 — Problem (0:14–0:32)</strong><br>
+                                        <span class="visual-tag">Avatar + 3 tarjetas: 1. Bloquear cat. 2. DLP básico 3. Sin descifrar</span>
+                                        <a href="/colossyan_slides/scene_02_problem.png" target="_blank"><img src="/colossyan_slides/scene_02_problem.png" alt="Scene 2 Canvas" class="img-preview mt-2"></a>
+                                        <div class="mt-2"><a href="/colossyan_slides/scene_02_problem.png" download="scene_02_problem.png" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.7rem; text-decoration:none;">⬇️ Descargar Lienzo PNG (Escena 2)</a></div>
+                                    </td>
+                                    <td>
+                                        <p>This is <strong>Shadow AI</strong>: employees using GenAI apps that IT never approved. <em>[pause]</em> And traditional controls fall short. <em>[pause]</em> Blocking the category pushes users to personal devices. <em>[pause]</em> Pattern-only DLP misses context. <em>[pause]</em> And without decryption, you can't even <strong>see</strong> the prompt.</p>
+                                        <button class="btn btn-secondary mt-2" style="font-size:0.75rem; padding:0.35rem 0.7rem;" onclick="copySceneText(this, `This is Shadow AI: employees using GenAI apps that IT never approved. And traditional controls fall short. Blocking the category pushes users to personal devices. Pattern-only DLP misses context. And without decryption, you can't even see the prompt.`)">📋 Copiar Locución Escena 2 (Limpia)</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>3 — Framework (0:32–0:38)</strong><br>
+                                        <span class="visual-tag">Flujo 5 pasos: Discover → Decrypt → Classify → Enforce → Refine</span>
+                                        <a href="/colossyan_slides/scene_03_framework.png" target="_blank"><img src="/colossyan_slides/scene_03_framework.png" alt="Scene 3 Canvas" class="img-preview mt-2"></a>
+                                        <div class="mt-2"><a href="/colossyan_slides/scene_03_framework.png" download="scene_03_framework.png" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.7rem; text-decoration:none;">⬇️ Descargar Lienzo PNG (Escena 3)</a></div>
+                                    </td>
+                                    <td>
+                                        <p>Cisco Secure Access turns GenAI governance into five steps: <em>[pause]</em> discover, decrypt, classify, enforce, and refine.</p>
+                                        <button class="btn btn-secondary mt-2" style="font-size:0.75rem; padding:0.35rem 0.7rem;" onclick="copySceneText(this, `Cisco Secure Access turns GenAI governance into five steps: discover, decrypt, classify, enforce, and refine.`)">📋 Copiar Locución Escena 3 (Limpia)</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>4 — Discover (0:38–0:50)</strong><br>
+                                        <span class="visual-tag">Mock AI Access | "You can't govern what you can't see."</span>
+                                        <a href="/colossyan_slides/scene_04_discover.png" target="_blank"><img src="/colossyan_slides/scene_04_discover.png" alt="Scene 4 Canvas" class="img-preview mt-2"></a>
+                                        <div class="mt-2"><a href="/colossyan_slides/scene_04_discover.png" download="scene_04_discover.png" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.7rem; text-decoration:none;">⬇️ Descargar Lienzo PNG (Escena 4)</a></div>
+                                    </td>
+                                    <td>
+                                        <p>First, <strong>discover</strong>. <em>[pause]</em> AI Access shows which GenAI apps are in use across your organization, and how risky they are. <em>[beat]</em> You can't govern what you can't see.</p>
+                                        <button class="btn btn-secondary mt-2" style="font-size:0.75rem; padding:0.35rem 0.7rem;" onclick="copySceneText(this, `First, discover. AI Access shows which GenAI apps are in use across your organization, and how risky they are. You can't govern what you can't see.`)">📋 Copiar Locución Escena 4 (Limpia)</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>5 — Decrypt (0:50–1:02)</strong><br>
+                                        <span class="visual-tag">Prerrequisito HTTPS Inspection | Common misconfiguration</span>
+                                        <a href="/colossyan_slides/scene_05_decrypt.png" target="_blank"><img src="/colossyan_slides/scene_05_decrypt.png" alt="Scene 5 Canvas" class="img-preview mt-2"></a>
+                                        <div class="mt-2"><a href="/colossyan_slides/scene_05_decrypt.png" download="scene_05_decrypt.png" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.7rem; text-decoration:none;">⬇️ Descargar Lienzo PNG (Escena 5)</a></div>
+                                    </td>
+                                    <td>
+                                        <p>Second, <strong>decrypt</strong>. <em>[pause]</em> Prompt inspection requires HTTPS inspection on the matching access policy. <em>[pause]</em> Skip this step, and every prompt is just encrypted traffic. <em>[beat]</em> It's a common misconfiguration.</p>
+                                        <button class="btn btn-secondary mt-2" style="font-size:0.75rem; padding:0.35rem 0.7rem;" onclick="copySceneText(this, `Second, decrypt. Prompt inspection requires HTTPS inspection on the matching access policy. Skip this step, and every prompt is just encrypted traffic. It's a common misconfiguration.`)">📋 Copiar Locución Escena 5 (Limpia)</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>6 — Classify & Enforce (1:02–1:17)</strong><br>
+                                        <span class="visual-tag">Panel DLP AI Guardrails | Monitor vs Block</span>
+                                        <a href="/colossyan_slides/scene_06_classify_enforce.png" target="_blank"><img src="/colossyan_slides/scene_06_classify_enforce.png" alt="Scene 6 Canvas" class="img-preview mt-2"></a>
+                                        <div class="mt-2"><a href="/colossyan_slides/scene_06_classify_enforce.png" download="scene_06_classify_enforce.png" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.7rem; text-decoration:none;">⬇️ Descargar Lienzo PNG (Escena 6)</a></div>
+                                    </td>
+                                    <td>
+                                        <p>Next, <strong>classify and enforce</strong>. <em>[pause]</em> In your DLP policy, add an <strong>AI Guardrails</strong> rule. <em>[pause]</em> It inspects prompts, responses, and file uploads for sensitive data and source code, <em>[pause]</em> then monitors or blocks the interaction.</p>
+                                        <button class="btn btn-secondary mt-2" style="font-size:0.75rem; padding:0.35rem 0.7rem;" onclick="copySceneText(this, `Next, classify and enforce. In your DLP policy, add an AI Guardrails rule. It inspects prompts, responses, and file uploads for sensitive data and source code, then monitors or blocks the interaction.`)">📋 Copiar Locución Escena 6 (Limpia)</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>7 — Refine (1:17–1:25)</strong><br>
+                                        <span class="visual-tag">Estrategia: Baseline en Monitor → Tune → Block</span>
+                                        <a href="/colossyan_slides/scene_07_refine.png" target="_blank"><img src="/colossyan_slides/scene_07_refine.png" alt="Scene 7 Canvas" class="img-preview mt-2"></a>
+                                        <div class="mt-2"><a href="/colossyan_slides/scene_07_refine.png" download="scene_07_refine.png" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.7rem; text-decoration:none;">⬇️ Descargar Lienzo PNG (Escena 7)</a></div>
+                                    </td>
+                                    <td>
+                                        <p>Finally, <strong>refine</strong>. <em>[pause]</em> Start in Monitor mode. <em>[pause]</em> Baseline real usage, tune out false positives, then move to Block.</p>
+                                        <button class="btn btn-secondary mt-2" style="font-size:0.75rem; padding:0.35rem 0.7rem;" onclick="copySceneText(this, `Finally, refine. Start in Monitor mode. Baseline real usage, tune out false positives, then move to Block.`)">📋 Copiar Locución Escena 7 (Limpia)</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <strong>8 — Close (1:25–1:36)</strong><br>
+                                        <span class="visual-tag">Cierre + Transición al Escenario Andes Freight</span>
+                                        <a href="/colossyan_slides/scene_08_close.png" target="_blank"><img src="/colossyan_slides/scene_08_close.png" alt="Scene 8 Canvas" class="img-preview mt-2"></a>
+                                        <div class="mt-2"><a href="/colossyan_slides/scene_08_close.png" download="scene_08_close.png" class="btn btn-secondary" style="font-size:0.75rem; padding:0.35rem 0.7rem; text-decoration:none;">⬇️ Descargar Lienzo PNG (Escena 8)</a></div>
+                                    </td>
+                                    <td>
+                                        <p>Shadow AI is a <strong>data-exposure</strong> problem. <em>[beat]</em> The answer isn't to block AI. <em>[pause]</em> It's to <strong>govern</strong> it. <em>[beat]</em> Now, let's put that into practice.</p>
+                                        <button class="btn btn-secondary mt-2" style="font-size:0.75rem; padding:0.35rem 0.7rem;" onclick="copySceneText(this, `Shadow AI is a data-exposure problem. The answer isn't to block AI. It's to govern it. Now, let's put that into practice.`)">📋 Copiar Locución Escena 8 (Limpia)</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- TAB 4: SIMULADOR INTERACTIVO -->
+                <section class="tab-pane" id="tab-simulator">
+                    <div class="glass-card mb-4">
+                        <h2>Simulador de Escenario: Caso Andes Freight</h2>
+                        <p class="card-desc">Pon a prueba la toma de decisiones técnicas tal como lo experimentaría el alumno en el LMS de Cisco:</p>
+                    </div>
+
+                    <div class="simulator-box glass-card">
+                        <div class="scenario-intro">
+                            <h3>Contexto de la Misión</h3>
+                            <p><strong>Andes Freight</strong> es una empresa logística con 2.000 empleados que canaliza su tráfico a través de <strong>Cisco Secure Access</strong>. Un desarrollador acaba de pegar un algoritmo confidencial en una IA pública. Eres <strong>Maya</strong>, la ingeniera de seguridad asignada para resolver el incidente.</p>
+                        </div>
+
+                        <!-- Decision 1 -->
+                        <div class="decision-card" id="card-decision-1">
+                            <h4>Decisión 1: La Regla Silenciosa</h4>
+                            <p class="question-text">Configuraste una regla <em>AI Guardrails</em> para Ingeniería. El reporte de <em>AI Access</em> muestra uso masivo de IA, pero la regla registró <strong>cero eventos</strong>. ¿Cuál es la causa más probable?</p>
+                            
+                            <div class="options-list">
+                                <label class="option-item"><input type="radio" name="d1" value="A"> A) AI Guardrails solo inspecciona archivos adjuntos, no prompts de texto.</label>
+                                <label class="option-item"><input type="radio" name="d1" value="B"> B) La inspección HTTPS no está habilitada en la política de acceso de Ingeniería.</label>
+                                <label class="option-item"><input type="radio" name="d1" value="C"> C) Primero hay que bloquear la app de IA para que el motor DLP pueda analizarla.</label>
+                                <label class="option-item"><input type="radio" name="d1" value="D"> D) El DLP básico no reconoce código fuente y requiere un software externo.</label>
+                            </div>
+                            
+                            <button class="btn btn-primary mt-2" onclick="submitDecision(1)">Enviar Respuesta</button>
+                            <div class="feedback-box" id="feedback-d1"></div>
+                        </div>
+
+                        <!-- Decision 2 -->
+                        <div class="decision-card disabled" id="card-decision-2">
+                            <h4>Decisión 2: La Presión del CISO</h4>
+                            <p class="question-text">El CISO exige bloquear todas las IAs mañana mismo, pero Ingeniería depende de un asistente de código aprobado para cumplir un plazo crítico. ¿Qué debe recomendar Maya?</p>
+                            
+                            <div class="options-list">
+                                <label class="option-item"><input type="radio" name="d2" value="A"> A) Bloquear toda la categoría de IA de inmediato como pidió el CISO.</label>
+                                <label class="option-item"><input type="radio" name="d2" value="B"> B) Activar modo Bloqueo en todas las reglas y arreglar falsos positivos sobre la marcha.</label>
+                                <label class="option-item"><input type="radio" name="d2" value="C"> C) Mantener modo Monitoreo por un período acordado, ajustar falsos positivos y luego bloquear.</label>
+                                <label class="option-item"><input type="radio" name="d2" value="D"> D) Apagar todos los controles hasta que Legales redacte la política de uso.</label>
+                            </div>
+                            
+                            <button class="btn btn-primary mt-2" onclick="submitDecision(2)">Enviar Respuesta</button>
+                            <div class="feedback-box" id="feedback-d2"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- TAB 5: ARQUITECTURA -->
+                <section class="tab-pane" id="tab-architecture">
+                    <div class="glass-card mb-4">
+                        <h2>Arquitectura de Inspección en Cisco Secure Access (SSE)</h2>
+                        <p class="card-desc">Diagrama pedagógico de flujo de paquetes y gobierno de IA:</p>
+                    </div>
+
+                    <div class="glass-card text-center">
+                        <img src="/diagrams/01_diseno_instruccional_ES_diagram1.png" alt="Arquitectura SSE" class="img-preview" />
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
